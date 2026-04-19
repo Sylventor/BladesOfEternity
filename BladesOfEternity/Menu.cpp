@@ -15,7 +15,8 @@ const Skill* SKILLS[7] =
     new Heal("Healing Light", 3, 7, 20),
     new Heal("Regeneration", 3, 10, 30),
 
-    new Freeze("Frost Chains", 4, 20, 1)
+    new Freeze("Frost Chains", 4, 20, 1),
+	new Freeze("Stun", 4, 20, 1)
 };
 
 Hero* HEROES[3] =
