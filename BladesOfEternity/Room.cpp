@@ -80,6 +80,11 @@ vector<Enemy*> Room::getEnemies() {
 
 // --------- GAME LOGIC ---------
 
+/*
+* winner:
+* Check winner. 0 - Fight continue, 1 - Hero wins, 2 - Enemy wins
+* ref: Room -> fight()
+*/
 int Room::winner() {
     if (player->getHP() == 0) return 2;
     for (Enemy* e : enemies) {
@@ -88,6 +93,10 @@ int Room::winner() {
     return 1;
 }
 
+/*
+* printStats:
+* Print player and enemy stats
+*/
 void Room::printStats() {
     cout << player->getName() << endl;
     cout << "HP: " << player->getHP() << "/" << player->getMaxHP() << " Energy: " << player->getEnergy() << "/" << player->getMaxEnergy() << endl;
@@ -100,6 +109,11 @@ void Room::printStats() {
     }
 }
 
+/*
+* fight:
+* Fight logic
+* ref: Hero -> newRoom()
+*/
 void Room::fight() {
     player->setHP(player->getMaxHP());
     cout << endl <<"========================================" << endl;
@@ -133,6 +147,10 @@ void Room::fight() {
     }
 }
 
+/*
+* playerTurn:
+* ref: Room -> fight()
+*/
 void Room::playerTurn() { 
     while (true){
         cout << endl << "Choose action:" << endl;
@@ -184,6 +202,10 @@ void Room::playerTurn() {
     }
 }
 
+/*
+* enemyTurn:
+* ref: Room -> fight()
+*/
 void Room::enemyTurn() {
     for (Enemy* e : enemies) {
         e->action(player);
