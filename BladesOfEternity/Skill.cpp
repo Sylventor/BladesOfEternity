@@ -12,19 +12,17 @@ Defend::Defend(string name, int type, int energyCost, int absorbedDamage) : Skil
 Heal::Heal(string name, int type, int energyCost, int heal) : Skill(name, type, energyCost), heal(heal) {};
 Freeze::Freeze(string name, int type, int energyCost, int freezeTime) : Skill(name, type, energyCost), freezeTime(freezeTime) {};
 
+// --------- GETTER ---------
 
 int Skill::getEnergyCost() const {
 	return energyCost;
 }
-
 int Skill::getType() const {
 	return type;
 }
-
 string Skill::getName() const {
 	return name;
 }
-
 int Attack::getPower() const {
 	return damage;
 }
@@ -37,6 +35,9 @@ int Heal::getPower() const {
 int Freeze::getPower() const {
 	return freezeTime;
 }
+
+
+// --------- GAME LOGIC ---------
 
 void Attack::printInfo() {
 	cout << name << " (Cost: " << energyCost << ", Damage: " << damage << ")" << endl;

@@ -15,11 +15,16 @@ Enemy::Enemy(const Enemy& character) {
     difficulty = character.difficulty;
 }
 
+// --------- GETTER ---------
+
 string Enemy::getName() { return name; }
 int Enemy::getHP() { return hp; }
 int Enemy::getDamage() { return dmg; }
 int Enemy::getFreezeTime() { return freezeTime; }
 int Enemy::getDifficulty() { return difficulty; }
+
+
+// --------- GAME LOGIC ---------
 
 bool Enemy::isAlive()
 {

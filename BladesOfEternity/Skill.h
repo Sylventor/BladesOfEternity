@@ -11,7 +11,7 @@ class Skill
 {
 protected:
 	string name;
-	int type; // 1 - Attack, 2 - Defend, 3 - Heal, 
+	int type; // 1 - Attack, 2 - Defend, 3 - Heal, 4 - Freeze
 	int energyCost;
 public:
 	Skill(string name, int type, int energyCost);

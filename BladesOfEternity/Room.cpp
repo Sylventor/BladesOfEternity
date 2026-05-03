@@ -69,14 +69,16 @@ Room::~Room() {
     }
 }
 
+// --------- GETTER ---------
+
 Hero* Room::getPlayer() {
     return player;
 }
-
 vector<Enemy*> Room::getEnemies() {
     return enemies;
 }
 
+// --------- GAME LOGIC ---------
 
 int Room::winner() {
     if (player->getHP() == 0) return 2;

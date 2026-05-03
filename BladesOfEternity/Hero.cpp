@@ -10,6 +10,9 @@ extern const Skill* SKILLS[7];
 
 Hero::Hero(string name, int maxHP, int maxEnergy, vector<Skill*> skills) : name(name), maxHP(maxHP), maxEnergy(maxEnergy), hp(maxHP), energy(maxEnergy), level(0), exp(0), expForLevel(300), absDamage(0), skills(skills) {};
 
+
+// --------- GETTER ---------
+
 string Hero::getName() { return name; }
 int Hero::getHP() { return hp; }
 int Hero::getMaxHP() { return maxHP; }
@@ -21,6 +24,9 @@ int Hero::getLevel() { return level; }
 int Hero::getAbsDamage() { return absDamage; }
 
 vector<Skill*>& Hero::getSkills() { return skills; }
+
+
+// --------- SETTER ---------
 
 void Hero::setHP(int value)
 {
@@ -66,6 +72,8 @@ void Hero::setAbsDamage(int value) {
 }
 
 
+// --------- GAME LOGIC ---------
+
 void Hero::useEnergy(int cost) {
     setEnergy(energy-cost);
 }
@@ -89,6 +97,11 @@ void Hero::addExp(int value) {
     setExp(getExp() + value);
 }
 
+/*
+* addSkill:
+* skill - Скил для добавления
+* ref: Hero -> levelUp()
+*/
 void Hero::addSkill(Skill* skill)
 {
     if (!skill) return;
@@ -102,6 +115,10 @@ void Hero::addSkill(Skill* skill)
     skills.push_back(skill);
 }
 
+/*
+* removeSkill:
+* index - Индекс скила в векторе Hero.skills, который нужно убрать
+*/
 void Hero::removeSkill(int index)
 {
     if (index < 0 || index >= skills.size())
@@ -114,6 +131,12 @@ void Hero::removeSkill(int index)
     skills.erase(skills.begin() + index);
 }
 
+/*
+* changeSkill:
+* skill - новый скил
+* index - Индекс скила в векторе Hero.skills, который нужно заменить
+* ref: Hero -> levelUp()
+*/
 void Hero::changeSkill(Skill* skill, int index)
 {
     if (!skill) return;
@@ -128,6 +151,11 @@ void Hero::changeSkill(Skill* skill, int index)
     skills[index] = skill;
 }
 
+/*
+* levelUp:
+* Проверка на повышение уровня и механика повышения уровня.
+* ref: Room -> fight()
+*/
 void Hero::levelUp() {
     if (getExp() >= getExpForLevel()) {
         level += 1;
@@ -232,6 +260,11 @@ void Hero::levelUp() {
     return;
 }
 
+/*
+* useSkill:
+* index - Индекс скила в векторе Hero.skills
+* room - Текущая комната
+*/
 void Hero::useSkill(int index, Room* room) {
     if (index >= 0 && index < skills.size())
     {
@@ -239,6 +272,10 @@ void Hero::useSkill(int index, Room* room) {
     }
 }
 
+/*
+* printSkills:
+* Выводит все скилы
+*/
 void Hero::printSkills() {
     int i = 1;
     for (Skill* s : skills) {
@@ -248,6 +285,11 @@ void Hero::printSkills() {
     }
 }
 
+/*
+* printSkills(type):
+* Выводит скилы определенного типа
+* type - Тип скила для вывода (1 - Attack, 2 - Defend, 3 - Heal, 4 - Freeze)
+*/
 void Hero::printSkills(int type) {
     int i = 1;
     for (Skill* s : skills) {
@@ -259,11 +301,21 @@ void Hero::printSkills(int type) {
     }
 }
 
+/*
+* update:
+* Обновление статистик игрока в начале хода
+* ref: Room -> fight()
+*/
 void Hero::update() {
     setAbsDamage(0);
     setEnergy(maxEnergy);
 }
 
+/*
+* newRoom:
+* Генерация комнаты и начало боя
+* ref: Menu -> displayMainMenu()
+*/
 void Hero::newRoom() {
     int enemiesCount = rand() % (level / 2 + 4) + 1;
     int roomDifficulty = level + (rand() % 5 - 2);
@@ -273,6 +325,11 @@ void Hero::newRoom() {
     delete currentRoom;
 }
 
+/*
+* generateSkills:
+* Генерация 3 случайных скилов
+* ref: Hero -> levelUp()
+*/
 vector<Skill*> Hero::generateSkills() {
     vector<Skill*> result;
     while (result.size() < 3) {
