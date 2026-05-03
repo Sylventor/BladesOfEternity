@@ -11,7 +11,7 @@ class Skill
 {
 protected:
 	string name;
-	int type;
+	int type; // 1 - Attack, 2 - Defend, 3 - Heal, 
 	int energyCost;
 public:
 	Skill(string name, int type, int energyCost);
@@ -20,10 +20,10 @@ public:
 	virtual void upgrade() = 0;
 	virtual void printInfo() = 0;
 
-	int getEnergyCost();
-	int getType();
-	string getName();
-	virtual int getPower() = 0;
+	int getEnergyCost() const;
+	int getType() const;
+	string getName() const;
+	virtual int getPower() const = 0;
 };
 
 
@@ -35,7 +35,7 @@ public:
 	void useSkill(Room* room);
 	void upgrade();
 	void printInfo();
-	int getPower();
+	int getPower() const;
 };
 
 
@@ -47,7 +47,7 @@ public:
 	void useSkill(Room* room);
 	void upgrade();
 	void printInfo();
-	int getPower();
+	int getPower() const;
 };
 
 
@@ -59,7 +59,7 @@ public:
 	void useSkill(Room* room);
 	void upgrade();
 	void printInfo();
-	int getPower();
+	int getPower() const;
 };
 
 
@@ -71,6 +71,6 @@ public:
 	void useSkill(Room* room);
 	void upgrade();
 	void printInfo();
-	int getPower();
+	int getPower() const;
 };
 

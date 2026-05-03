@@ -148,6 +148,37 @@ void Hero::levelUp() {
         if (action == 1) {
             cout << endl << "----------------------------------------" << endl;
             cout << endl << "Choose a new skill: " << endl;
+            vector<Skill*> newSkills = generateSkills();
+            int i = 1;
+            for (Skill* s : newSkills) {
+                cout << "[" << i << "] ";
+                s->printInfo();
+                i++;
+            }
+            int choise = 0;
+            do {
+                cout << endl << "> ";
+                cin >> choise;
+            } while (choise < 1 || choise > 3);
+
+            if (getSkills().size() < MAXSKILLS) {
+                addSkill(newSkills[choise - 1]);
+                cout << endl << "Learned new skill!" << endl;
+            }
+            else {
+                cout << endl << "Max skills reached!" << endl;
+                cout << endl << "Choose a skill to change: " << endl;
+                printSkills();
+
+                int index = 0;
+                do {
+                    cout << endl << "> ";
+                    cin >> index;
+                } while (index < 1 || index > MAXSKILLS);
+                changeSkill(newSkills[choise-1], index);
+
+                cout << endl << "Learned new skill!" << endl;
+            }
 
         } else if (action == 2) {
             cout << endl << "----------------------------------------" << endl;
@@ -167,7 +198,7 @@ void Hero::levelUp() {
                     cout << "[" << i << "] " << s->getName() << " (Freeze time: " << s->getPower() << " -> " << s->getPower() + 1 << ")" << endl;
                 }
             }
-            int choise;
+            int choise = 0;
             do {
                 cout << endl << "> ";
                 cin >> choise;
@@ -178,17 +209,22 @@ void Hero::levelUp() {
         else if (action == 3) {
             cout << endl << "----------------------------------------" << endl;
             cout << endl << "Improve your stats: " << endl;
-            cout << endl << "[1] +" << level * 3 << "Max HP";
-            cout << endl << "[2] +" << level << "Max Energy";
+            cout << endl << "[1] +" << level * 3 << " Max HP";
+            cout << endl << "[2] +" << level << " Max Energy";
 
-            int choise;
+            int choise = 0;
             do {
                 cout << endl << "> ";
                 cin >> choise;
             } while (choise < 1 || choise > 2);
-
-            setMaxHP(getMaxHP() + level * 3);
-            setMaxEnergy(getMaxEnergy() + level);
+            if (choise == 1) {
+                setMaxHP(getMaxHP() + level * 3);
+                cout << endl << "Stats improved! Max HP: " << getMaxHP() << endl;
+            }
+            else if (choise == 1) {
+                setMaxEnergy(getMaxEnergy() + level);
+                cout << endl << "Stats improved! Max energy: " << getMaxEnergy() << endl;
+            }
         }
 
         return levelUp();
@@ -208,6 +244,7 @@ void Hero::printSkills() {
     for (Skill* s : skills) {
         cout << "[" << i << "] ";
         s->printInfo();
+        i++;
     }
 }
 
@@ -240,7 +277,32 @@ vector<Skill*> Hero::generateSkills() {
     vector<Skill*> result;
     while (result.size() < 3) {
         int index = rand() % (sizeof(SKILLS) / sizeof(SKILLS[0]));
+        int randomBonus = rand() % (level + 1);
+        double scale = 1 + (level * 0.3);
         
+        Skill* randomSkill;
+
+        int power = (int)(SKILLS[index]->getPower() * scale) + randomBonus;
+        int cost = (int)(SKILLS[index]->getEnergyCost() * scale);
+
+        switch (SKILLS[index]->getType()) {
+        case 1:
+            randomSkill = new Attack(SKILLS[index]->getName(), 1, cost, power);
+            break;
+        case 2:
+            randomSkill = new Defend(SKILLS[index]->getName(), 2, cost, power);
+            break;
+        case 3:
+            randomSkill = new Heal(SKILLS[index]->getName(), 3, cost, power);
+            break;
+        case 4:
+            randomSkill = new Freeze(SKILLS[index]->getName(), 4, cost, power-randomBonus);
+            break;
+        default:
+            continue;
+        }
+
+        result.push_back(randomSkill);
     }
 
     return result;

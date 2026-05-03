@@ -10,45 +10,45 @@ Skill::Skill(string name, int type, int energyCost) : name(name), type(type), en
 Attack::Attack(string name, int type, int energyCost, int damage) : Skill(name, type, energyCost), damage(damage) {};
 Defend::Defend(string name, int type, int energyCost, int absorbedDamage) : Skill(name, type, energyCost), absorbedDamage(absorbedDamage) {};
 Heal::Heal(string name, int type, int energyCost, int heal) : Skill(name, type, energyCost), heal(heal) {};
-Freeze::Freeze(string name, int type, int energyCost, int FreezeTime) : Skill(name, type, energyCost), freezeTime(freezeTime) {};
+Freeze::Freeze(string name, int type, int energyCost, int freezeTime) : Skill(name, type, energyCost), freezeTime(freezeTime) {};
 
 
-int Skill::getEnergyCost() {
+int Skill::getEnergyCost() const {
 	return energyCost;
 }
 
-int Skill::getType() {
+int Skill::getType() const {
 	return type;
 }
 
-string Skill::getName() {
+string Skill::getName() const {
 	return name;
 }
 
-int Attack::getPower() {
+int Attack::getPower() const {
 	return damage;
 }
-int Defend::getPower() {
+int Defend::getPower() const {
 	return absorbedDamage;
 }
-int Heal::getPower() {
+int Heal::getPower() const {
 	return heal;
 }
-int Freeze::getPower() {
+int Freeze::getPower() const {
 	return freezeTime;
 }
 
 void Attack::printInfo() {
-	cout << name << " (Cost: " << energyCost << ", Damage: " << damage << endl;
+	cout << name << " (Cost: " << energyCost << ", Damage: " << damage << ")" << endl;
 }
 void Defend::printInfo() {
-	cout << name << " (Cost: " << energyCost << ", Absorbed damage: " << absorbedDamage << endl;
+	cout << name << " (Cost: " << energyCost << ", Absorbed damage: " << absorbedDamage << ")" << endl;
 }
 void Heal::printInfo() {
-	cout << name << " (Cost: " << energyCost << ", Heal: " << heal << endl;
+	cout << name << " (Cost: " << energyCost << ", Heal: " << heal << ")" << endl;
 }
 void Freeze::printInfo() {
-	cout << name << " (Cost: " << energyCost << ", Freeze time: " << freezeTime << endl;
+	cout << name << " (Cost: " << energyCost << ", Freeze time: " << freezeTime << ")" << endl;
 }
 
 void Attack::upgrade() {
