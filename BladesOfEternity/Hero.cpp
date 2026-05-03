@@ -99,7 +99,7 @@ void Hero::addExp(int value) {
 
 /*
 * addSkill:
-* skill - Скил для добавления
+* skill - New skill
 * ref: Hero -> levelUp()
 */
 void Hero::addSkill(Skill* skill)
@@ -117,7 +117,7 @@ void Hero::addSkill(Skill* skill)
 
 /*
 * removeSkill:
-* index - Индекс скила в векторе Hero.skills, который нужно убрать
+* index - Index of skill in vector Hero.skills
 */
 void Hero::removeSkill(int index)
 {
@@ -133,8 +133,8 @@ void Hero::removeSkill(int index)
 
 /*
 * changeSkill:
-* skill - новый скил
-* index - Индекс скила в векторе Hero.skills, который нужно заменить
+* skill - New skill
+* index - Index of skill in vector Hero.skills, which will change
 * ref: Hero -> levelUp()
 */
 void Hero::changeSkill(Skill* skill, int index)
@@ -153,7 +153,7 @@ void Hero::changeSkill(Skill* skill, int index)
 
 /*
 * levelUp:
-* Проверка на повышение уровня и механика повышения уровня.
+* Check level up and level up logic.
 * ref: Room -> fight()
 */
 void Hero::levelUp() {
@@ -262,8 +262,8 @@ void Hero::levelUp() {
 
 /*
 * useSkill:
-* index - Индекс скила в векторе Hero.skills
-* room - Текущая комната
+* index - Index of skill in vector Hero.skills
+* room - Curent room
 */
 void Hero::useSkill(int index, Room* room) {
     if (index >= 0 && index < skills.size())
@@ -274,7 +274,7 @@ void Hero::useSkill(int index, Room* room) {
 
 /*
 * printSkills:
-* Выводит все скилы
+* Print all skills
 */
 void Hero::printSkills() {
     int i = 1;
@@ -287,8 +287,8 @@ void Hero::printSkills() {
 
 /*
 * printSkills(type):
-* Выводит скилы определенного типа
-* type - Тип скила для вывода (1 - Attack, 2 - Defend, 3 - Heal, 4 - Freeze)
+* Print skills of a certain type
+* type - Type of skill (1 - Attack, 2 - Defend, 3 - Heal, 4 - Freeze)
 */
 void Hero::printSkills(int type) {
     int i = 1;
@@ -303,7 +303,7 @@ void Hero::printSkills(int type) {
 
 /*
 * update:
-* Обновление статистик игрока в начале хода
+* Update statistics at start of turn
 * ref: Room -> fight()
 */
 void Hero::update() {
@@ -313,7 +313,7 @@ void Hero::update() {
 
 /*
 * newRoom:
-* Генерация комнаты и начало боя
+* Generation of room and fight start
 * ref: Menu -> displayMainMenu()
 */
 void Hero::newRoom() {
@@ -327,7 +327,7 @@ void Hero::newRoom() {
 
 /*
 * generateSkills:
-* Генерация 3 случайных скилов
+* Generates 3 random skills
 * ref: Hero -> levelUp()
 */
 vector<Skill*> Hero::generateSkills() {
