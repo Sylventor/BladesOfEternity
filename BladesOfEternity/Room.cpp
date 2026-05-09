@@ -7,6 +7,8 @@
 
 using namespace std;
 
+static int rooms_survived = 0;
+
 const Enemy ENEMIES[30] =
 {
     Enemy("Slime", 10, 2, 1),
@@ -132,6 +134,7 @@ void Room::fight() {
     } while (!winner());
     
     if (winner() == 1) {
+        rooms_survived += 1;
         cout << "            VICTORY!" << endl << endl;
         cout << "========================================" << endl << endl;
         cout << "Rewards:" << endl;
@@ -143,6 +146,7 @@ void Room::fight() {
     if (winner() == 2) {    
         cout << "            DEFEAT!" << endl << endl;
         cout << "========================================" << endl;
+        cout << endl << "Rooms survived: " << rooms_survived << endl;
         exit(0);
     }
 }
