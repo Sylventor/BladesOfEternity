@@ -24,31 +24,41 @@ int Enemy::getFreezeTime() { return freezeTime; }
 int Enemy::getDifficulty() { return difficulty; }
 
 
-// --------- GAME LOGIC ---------
-
-bool Enemy::isAlive()
-{
-    return hp > 0;
-}
+// --------- SETTER ---------
 
 void Enemy::setHP(int value)
 {
     hp = value;
     if (hp < 0) hp = 0;
 }
-
 void Enemy::setDamage(int value)
 {
     dmg = value;
     if (dmg < 0) dmg = 0;
 }
-
 void Enemy::setFreezeTime(int value)
 {
     freezeTime = value;
     if (freezeTime < 0) freezeTime = 0;
 }
 
+// --------- GAME LOGIC ---------
+
+/*
+* isAlive:
+* Checks if enemy is alive
+* ref: Room -> winner()
+*/
+bool Enemy::isAlive()
+{
+    return hp > 0;
+}
+
+/*
+* damage:
+* Damages enemy
+* ref: Attack -> useSkill()
+*/
 void Enemy::damage(int damage)
 {
     if (damage < 0) return;
@@ -59,15 +69,31 @@ void Enemy::damage(int damage)
         hp = 0;
 }
 
+/*
+* damage:
+* Heals enemy
+* ref: Enemy -> action()
+*/
 void Enemy::heal()
 {
     hp += dmg;
 }
 
+/*
+* attack:
+* Enemy attacks hero
+* ref: Enemy -> action()
+*/
 void Enemy::attack(Hero* hero) {
     hero->damage(dmg);
 }
 
+/*
+* freeze:
+* Hero freezes enemy
+* time - Amount of turns to freeze
+* ref: Freeze -> useSkill()
+*/
 void Enemy::freeze(int time)
 {
     if (time <= 0) return;
@@ -75,6 +101,11 @@ void Enemy::freeze(int time)
     freezeTime = time;
 }
 
+/*
+* update:
+* Updates enemy stats every turn
+* ref: Room -> enemyTurn()
+*/
 void Enemy::update()
 {
     if (freezeTime > 0)
@@ -83,6 +114,11 @@ void Enemy::update()
     }
 }
 
+/*
+* action:
+* Random action of enemy (attack/heal)
+* ref: Room -> enemyTurn()
+*/
 void Enemy::action(Hero* hero) {
     if (!freezeTime && isAlive()) {
         int heal_chance;
@@ -102,6 +138,11 @@ void Enemy::action(Hero* hero) {
     }
 }
 
+/*
+* printInfo:
+* Prints stats of enemy
+* ref: Room -> printStats()
+*/
 void Enemy::printInfo() {
     cout << name << " HP: " << hp;
     if (freezeTime && isAlive()) cout << " (Freezed for:" << freezeTime << " turns)";

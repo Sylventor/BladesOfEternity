@@ -119,6 +119,7 @@ void Hero::addSkill(Skill* skill)
 * removeSkill:
 * index - Index of skill in vector Hero.skills
 */
+/*
 void Hero::removeSkill(int index)
 {
     if (index < 0 || index >= skills.size())
@@ -129,7 +130,7 @@ void Hero::removeSkill(int index)
 
     delete skills[index];
     skills.erase(skills.begin() + index);
-}
+}*/
 
 /*
 * changeSkill:

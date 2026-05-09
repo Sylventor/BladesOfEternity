@@ -3,7 +3,6 @@
 #include "Hero.h"
 #include "Skill.h"
 
-
 const Skill* SKILLS[7] =
 {
     new Attack("Power Strike", 1, 5, 15),
@@ -57,6 +56,12 @@ Hero* HEROES[3] =
     )
 };
 
+/*
+* displayMainMenu:
+* Displays the title and character selection.
+* Starts the main game loop.
+* ref: main()
+*/
 void Menu::displayMainMenu() {
 	cout << "========================================" << endl;
 	cout << "        Blades of Eternity" << endl;
